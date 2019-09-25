@@ -68,12 +68,11 @@ const SectionBudget = ({ collective, stats }) => {
 
             // Merge items, filter expenses that already have a transaction as they'll already be
             // included in `transactions`.
-            const unpaidExpenses = filter(expenses, e => !e.transaction);
-            const budgetItemsUnsorted = [...transactions, ...unpaidExpenses];
+            const budgetItemsUnsorted = [...transactions, ...expenses];
             const budgetItems = orderBy(budgetItemsUnsorted, i => new Date(i.createdAt), ['desc']).slice(0, 3);
             return (
               <Container flex="10" mb={3} width="100%" maxWidth={800}>
-                <BudgetItemsList items={budgetItems} />
+                <BudgetItemsList items={budgetItems} isCompact />
                 <Flex flexWrap="wrap" justifyContent="space-between" mt={3}>
                   <Box flex="1 1" mx={[0, 2]}>
                     <Link route="transactions" params={{ collectiveSlug: collective.slug }}>
